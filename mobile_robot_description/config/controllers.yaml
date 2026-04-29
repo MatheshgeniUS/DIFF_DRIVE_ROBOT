@@ -1,7 +1,7 @@
 controller_manager:
   ros__parameters:
     update_rate: 100  # Hz
-    use_sim_time: true
+    #use_sim_time: true
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -22,9 +22,15 @@ diff_drive_controller:
     # wheel_radius value (0.1)
     wheel_radius: 0.1
 
+    wheel_seperation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+
     # Odometry and Frames
+    publish_rate: 50
     odom_frame_id: odom
     base_frame_id: base_footprint
+    enable_odom_tf: true
     
     # In Jazzy/Harmonic, set this to false to accept standard Twist messages
     use_stamped_vel: false
@@ -37,6 +43,7 @@ diff_drive_controller:
         min_velocity: -1.0
         has_acceleration_limits: true
         max_acceleration: 1.0
+        min_acceleration: -1.0
     angular:
       z:
         has_velocity_limits: true
@@ -44,3 +51,7 @@ diff_drive_controller:
         min_velocity: -2.0
         has_acceleration_limits: true
         max_acceleration: 2.0
+        min_acceleration: -2.0
+
+    pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
